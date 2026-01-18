@@ -1,0 +1,101 @@
+Here is the complete `build.gradle` configuration file for your Android project based on the provided specifications:
+
+```groovy
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        // Define versions for dependencies to ensure consistency across the project.
+        kotlin_version = '1.7.10'
+        coroutines_version = '1.6.0'
+        lifecycle_version = '2.4.0'
+        appcompat_version = '1.4.1'
+        material_version = '1.5.0'
+        retrofit_version = '2.9.0'
+        gson_version = '2.8.8'
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.2.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+```
+
+```groovy
+// Module-level build file where you can define specific configurations for your app module.
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 33 // Set to the latest SDK version for compatibility
+    defaultConfig {
+        applicationId "com.sdkdesigner78436.facebook-account-health-tool"
+        minSdkVersion 21 // Minimum SDK version required for the app
+        targetSdkVersion 33 // Target SDK version for best performance
+        versionCode 1 // Version code for the app
+        versionName "1.0.0" // Version name for better user visibility
+        
+        // Enables view binding for easier management of view elements.
+        buildFeatures {
+            viewBinding true
+        }
+        
+        // Kotlin options for compatibility and optimizations.
+        kotlinOptions {
+            jvmTarget = '1.8' // Specifies the version of JVM target
+        }
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false // Disable code obfuscation for easier debugging
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // Core Android libraries for app functionality
+    implementation "androidx.appcompat:appcompat:$appcompat_version" // Provides support for ActionBar, etc.
+    implementation "com.google.android.material:material:$material_version" // Material design components
+
+    // Kotlin coroutines for asynchronous programming
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version" // Core coroutines library
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version" // Android-specific coroutines
+
+    // Architecture components for lifecycle management
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version" // Lifecycle runtime with Kotlin extensions
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version" // ViewModel for managing UI-related data
+
+    // Networking library for API calls
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version" // Retrofit for RESTful API interactions
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version" // Gson converter for Retrofit
+
+    // Gson for JSON serialization/deserialization
+    implementation "com.google.code.gson:gson:$gson_version" // Gson library
+}
+
+// This configuration allows for a robust and efficient build process, leveraging the capabilities of the Android platform.
+// The inclusion of libraries like Retrofit ensures efficient data management for features related to social media account health,
+// including MadHub functionalities for continuous operation and management.
+```
+
+### Key Points:
+- The `build.gradle` file is structured according to Android Gradle Plugin standards.
+- Dependencies are chosen to support the functionalities related to the Facebook account health tool.
+- Comments explain the purpose of each dependency and the overall configurations.
+- The application leverages the Android platform's capabilities for a seamless user experience, alongside the features offered by MadHub for effective social media management and automation.
